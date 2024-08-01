@@ -9,6 +9,10 @@ def calc_paces(vdot: float) -> dict:
 
   table = pd.read_csv("table.csv")
   print(table.head())
+
+  # row = table.loc[table["VDOT"] == 30.2]
+  # result = row["1M"]
+  # print(result)
   
   fractions = {
     "easy": 0.66, # 59-74%
@@ -26,8 +30,9 @@ def calc_paces(vdot: float) -> dict:
 
   for key in fractions:
     vdot_frac = round(vdot*fractions[key],1)
-    lookup = table.loc[table["VDOT"] == vdot_frac, "1M"]
-    print(lookup)
-   # paces[key] = 
+    row = table.loc[table["VDOT"] == vdot_frac]
+    result = row["1M"].astype("string") #<- this isn't working. Need a string
+    print(result)
     
-  print(paces)
+  for key in paces:
+    print("{}:{}".format(key,paces[key]))

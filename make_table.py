@@ -88,16 +88,18 @@ def make_table(start: int, end: int, step: float, f_name: str) -> pd.DataFrame:
     end_int = int(end*10)
     step_int = int(step*10)
     
-    table = list()
-    for v in range(start_int, end_int+1, step_int):
-        temp = list()
-        v_float = v/10
-        temp.append(v_float)
-        for key in DISTANCES:
+    table = dict()
+
+    # Populate table["VDOT"] with all the values we'll be tabluating
+    for i in range(start_int, end_int+1, step_int):
+        table["VDOT"].append(i/10)
+
+    # Populate table with the values of f(v) for each v
+    for v in table["VDOT"]:
+        for key in list(DISTANCES.keys()):
             root = round(newton_raphson(DISTANCES[key], v_float),2)
             time = format_minutes(root)
-            temp.append(time)
-        table.append(temp)
+            table[key].append(time)
                         
     
     table = pd.DataFrame(table, columns=cols)
