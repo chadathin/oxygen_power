@@ -11,7 +11,7 @@ COMMON_DISTANCES = {
 def vdot(dist: float, units: str, time: str) -> float:
     minutes = 0
     has_hours = False
-    print(list(COMMON_DISTANCES.keys()))
+    # print(list(COMMON_DISTANCES.keys()))
     # Check for common distances in imperial units
     if units == "mi" and dist in list(COMMON_DISTANCES.keys()):
         dist = COMMON_DISTANCES[dist]

@@ -5,7 +5,11 @@ import os
 # Define the function f(t)
 def f(t, m, R):
     try:
+        
+        # VO2
         numerator = -4.60 + 0.182258 * (m / t) + 0.000104 * (m / t)**2
+        
+        # per cent
         denominator = 0.8 + 0.1894393 * np.exp(-0.012778 * t) + 0.2989558 * np.exp(-0.1932605 * t)
         return (numerator / denominator) - R
     except OverflowError:
