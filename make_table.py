@@ -25,7 +25,7 @@ def f_prime(t, m):
         return np.inf
 
 # Newton-Raphson method
-def newton_raphson(m, R, initial_guess=1.0, tolerance=1e-8, max_iterations=1000):
+def newton_raphson(m, R, initial_guess=3.0, tolerance=1e-8, max_iterations=1000):
     t = initial_guess
     for _ in range(max_iterations):
         f_t = f(t, m, R)
@@ -59,7 +59,7 @@ def format_minutes(time: float)-> str:
         return "{:d}:{:02d}:{:02d}".format(hours,minutes,seconds)
     else:
         minutes = int(time)
-        seconds = int((time - minutes) * 60)
+        seconds = int((time%1) * 60)
         return "{:02d}:{:02d}".format(minutes,seconds)
 
 def make_table(start: int, end: int, step: float, f_name: str) -> pd.DataFrame:
@@ -69,14 +69,14 @@ def make_table(start: int, end: int, step: float, f_name: str) -> pd.DataFrame:
         "1M": 1609.34,
         "3K": 3000,
         "5K": 5000,
-        "8k": 8000,
+        "8K": 8000,
         "10K": 10000,
         "10M": 16093.4,
-        "Half": 21082.41,
-        "Full": 42195.24
+        "Half": 21097.5,
+        "Full": 42195
     }
 
-    cols = ["VODT"]
+    cols = ["VDOT"]
     for key in list(DISTANCES.keys()):
         cols.append(key)
 
@@ -97,8 +97,13 @@ def make_table(start: int, end: int, step: float, f_name: str) -> pd.DataFrame:
                         
     
     table = pd.DataFrame(table, columns=cols)
-    if os.path.isfile("./"+f_name):
-        return "Error: File already exists"
-    else:
-        table.to_csv("./"+f_name)
-        return "File created successfully"
+    table.to_csv("./"+f_name)
+    return None
+    
+    # if os.path.isfile("./"+f_name):
+    #     print("Error: File already exists")
+    #     return -1
+    # else:
+    #     table.to_csv("./"+f_name)
+    #     print("File created successfully")
+    #     return 0
