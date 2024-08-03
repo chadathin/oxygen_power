@@ -8,7 +8,7 @@ def calc_paces(vdot: float) -> dict:
   # denominator = 0.8 + 0.1894393 * np.exp(-0.012778 * t) + 0.2989558 * np.exp(-0.1932605 * t)
 
   table = pd.read_csv("table.csv")
-  print(table.head())
+  # print(table.head())
 
   # row = table.loc[table["VDOT"] == 30.2]
   # result = row["1M"]
@@ -16,9 +16,9 @@ def calc_paces(vdot: float) -> dict:
   
   fractions = {
     "easy": 0.66, # 59-74%
-    "marathon": 0.80, # 75-84%
-    "threshold": 0.86, # 83-88%
-    "interval": 0.98 # 97-100%
+    "marathon": 0.79, # 75-84%
+    "threshold": 0.85, # 83-88%
+    "interval": 0.93 # 97-100%
   }
 
   paces = {
@@ -31,8 +31,8 @@ def calc_paces(vdot: float) -> dict:
   for key in fractions:
     vdot_frac = round(vdot*fractions[key],1)
     row = table.loc[table["VDOT"] == vdot_frac]
-    result = row["1M"].astype("string") #<- this isn't working. Need a string
-    print(result)
+    col = row["1M"].values[0]
+    paces[key] = col
     
   for key in paces:
-    print("{}:{}".format(key,paces[key]))
+    print("{}: {}".format(key,paces[key]))
