@@ -33,6 +33,7 @@ def calc_paces(vdot: float) -> dict:
     row = table.loc[table["VDOT"] == vdot_frac]
     col = row["1M"].values[0]
     paces[key] = col
-    
-  for key in paces:
-    print("{}: {}".format(key,paces[key]))
+  
+  return paces
+  # for key in paces:
+  #   print("{}: {}".format(key,paces[key]))

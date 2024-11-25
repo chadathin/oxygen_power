@@ -67,6 +67,12 @@ def format_minutes(time: float)-> str:
         return "{:02d}:{:02d}".format(minutes,seconds)
 
 def make_table(start: int, end: int, step: float, f_name: str) -> pd.DataFrame:
+    """
+    start:
+    end:
+    step:
+    float:
+    """
 
     DISTANCES = {
         "1K": 1000,
